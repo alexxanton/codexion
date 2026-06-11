@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 15:07:40 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/11 12:53:30 by aanton-a         ###   ########.fr       */
+/*   Created: 2026/06/11 12:12:35 by aanton-a          #+#    #+#             */
+/*   Updated: 2026/06/11 12:26:07 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <codexion.h>
 
-int	main(int argc, char **argv)
+t_data	*parse_data(char **argv)
 {
 	t_data	*data;
 
-	if (argc != 9)
-	{
-		printf("All the following arguments have to be provided:\n");
-		printf("\tnumber_of_coders time_to_burnout time_to_compile\n");
-		printf("\ttime_to_debug time_to_refactor ");
-		printf("number_of_compiles_required\n\tdongle_cooldown scheduler\n");
-		return (1);
-	}
-	data = parse_data(argv);
-	if (!data)
-	{
-		printf("Error parsing arguments!");
-		return (1);
-	}
-	begin_simulation(data);
+	data = malloc(sizeof(t_data *));
+	(void)argv;
+	return (data);
 }

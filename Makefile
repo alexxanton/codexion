@@ -1,9 +1,11 @@
 NAME = codexion
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -pthread -I include
 RM = rm -f
 
-SRCS = main.c	\
+SRCS = main.c								\
+	   src/parsing/parse_data.c				\
+	   src/simulation/begin_simulation.c	\
 
 OBJS = $(SRCS:.c=.o)
 
