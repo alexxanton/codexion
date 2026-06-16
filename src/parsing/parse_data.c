@@ -12,7 +12,7 @@
 
 #include <codexion.h>
 
-t_scheduler	get_scheduler(char *type)
+static t_scheduler	get_scheduler(char *type)
 {
 	if (strcmp(type, "fifo") == 0)
 		return FIFO;
