@@ -27,10 +27,10 @@ typedef enum e_scheduler_types
 typedef struct s_data
 {
 	long		number_of_coders;
-	long long	time_to_burnout;
-	long long	time_to_compile;
-	long long	time_to_debug;
-	long long	time_to_refactor;
+	long		time_to_burnout;
+	long		time_to_compile;
+	long		time_to_debug;
+	long		time_to_refactor;
 	long		number_of_compiles_required;
 	long		dongle_cooldown;
 	t_scheduler	scheduler;
