@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <string.h>
 
 typedef enum e_scheduler_types
 {

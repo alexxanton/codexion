@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 9)
 	{
-		printf("All the following arguments have to be provided:\n");
+		printf("All the following arguments must to be provided:\n");
 		printf("\tnumber_of_coders time_to_burnout time_to_compile\n");
 		printf("\ttime_to_debug time_to_refactor ");
 		printf("number_of_compiles_required\n\tdongle_cooldown scheduler\n");
