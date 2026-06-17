@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 17:34:41 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/11 15:42:33 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/17 16:07:58 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_coder
 }				t_coder;
 
 t_data	*parse_data(char **argv);
+t_coder	*init_coders(t_data *data);
 void	begin_simulation(t_data *data);
 
 #endif
