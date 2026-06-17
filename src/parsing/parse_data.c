@@ -6,26 +6,65 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:12:35 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/11 12:26:07 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/17 14:36:15 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <codexion.h>
 
+static bool	is_numeric(char *str)
+{
+	if (!*str)
+		return (false);
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
+static bool	valid_args(char **argv)
+{
+	int	count;
+	int	len;
+
+	count = 0;
+	while (*argv++ && count++ < 7)
+	{
+		if (!is_numeric(*argv))
+		{
+			printf("Argument #%d `%s` must only be numeric.\n", count, *argv);
+			return (false);
+		}
+		len = strlen(*argv);
+		if (len > 10 || (len == 10 && strcmp(*argv, "2147483647") > 0))
+		{
+			printf("The number `%s` overflows so it's invalid.\n", *argv);
+			printf("%d\n", atoi(*argv));
+			return (false);
+		}
+	}
+	return (true);
+}
+
 static t_scheduler	get_scheduler(char *type)
 {
 	if (strcmp(type, "fifo") == 0)
-		return FIFO;
+		return (FIFO);
 	else if (strcmp(type, "edf") == 0)
-		return EDF;
-	//printf("Unknown scheduler type `%s` defaulting to `fifo`\n", type);
-	return FIFO;
+		return (EDF);
+	printf("Warning: Unknown scheduler type `%s` defaulting to `fifo`\n", type);
+	return (FIFO);
 }
 
 t_data	*parse_data(char **argv)
 {
 	t_data	*data;
 
+	if (!valid_args(argv))
+		return (NULL);
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);

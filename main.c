@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 15:07:40 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/11 12:53:30 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:34:23 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	data = parse_data(argv);
 	if (!data)
 	{
-		printf("Error parsing arguments!");
+		printf("Error parsing arguments!\n");
 		return (1);
 	}
 	begin_simulation(data);
