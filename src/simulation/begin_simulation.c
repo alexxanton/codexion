@@ -17,5 +17,10 @@ void	begin_simulation(t_data *data)
 	t_coder	*coders;
 
 	coders = init_coders(data);
+	if (!coders)
+	{
+		printf("Failed to allocate memory\n");
+		return ;
+	}
 	(void)coders;
 }
