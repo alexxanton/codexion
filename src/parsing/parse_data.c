@@ -38,13 +38,19 @@ static bool	valid_args(char **argv)
 			printf("Argument #%d `%s` must only be numeric.\n", count, *argv);
 			return (false);
 		}
+		while (**argv == '0')
+			(*argv)++;
 		len = strlen(*argv);
 		if (len > 10 || (len == 10 && strcmp(*argv, "2147483647") > 0))
 		{
 			printf("The number `%s` overflows so it's invalid.\n", *argv);
-			printf("%d\n", atoi(*argv));
 			return (false);
 		}
+	}
+	if (strcmp(*argv, "fifo") != 0 && strcmp(*argv, "edf") != 0)
+	{
+		printf("Unknown scheduler type `%s`\n", *argv);
+		return (false);
 	}
 	return (true);
 }
@@ -55,7 +61,6 @@ static t_scheduler	get_scheduler(char *type)
 		return (FIFO);
 	else if (strcmp(type, "edf") == 0)
 		return (EDF);
-	printf("Warning: Unknown scheduler type `%s` defaulting to `fifo`\n", type);
 	return (FIFO);
 }
 
