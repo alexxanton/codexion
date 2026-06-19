@@ -3,6 +3,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -pthread -I include
 RM = rm -f
 OBJ_DIR = objs
+HEADERS = include/codexion.h
 
 SRCS = main.c								\
 	   src/parsing/parse_data.c				\
@@ -10,6 +11,9 @@ SRCS = main.c								\
 	   src/coders/init.c					\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+
+run: $(NAME)
+	./$(NAME) 5 1000 1000 1000 1000 5 1000 fifo
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
