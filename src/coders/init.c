@@ -50,7 +50,7 @@ static t_coder	*allocate_coders(t_data *data)
 	coders = malloc(sizeof(t_coder) * qty);
 	if (!coders)
 		return (NULL);
-	dongles = malloc(sizeof(t_dongle) * (qty + (qty == 1)));
+	dongles = malloc(sizeof(t_dongle) * qty);
 	if (!dongles)
 	{
 		// todo: free coders
@@ -75,7 +75,8 @@ static int	fill_data(t_data *data, t_coder *coders)
 		coders[i].data = data;
 		coders[i].compiles_left = data->number_of_compiles_required;
 		coders[i].right_dongle = &dongles[i];
-		coders[i].left_dongle = &dongles[(i - 1) % data->number_of_coders];
+		if (data->number_of_coders > 1)
+			coders[i].left_dongle = &dongles[(i - 1) % data->number_of_coders];
 		possible_errors += pthread_create(
 			&coders[i].thread_id, NULL, func, &coders[i]
 		);
