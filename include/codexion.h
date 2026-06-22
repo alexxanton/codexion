@@ -26,19 +26,22 @@ typedef enum e_scheduler_types
 
 typedef enum	e_coder_states
 {
+	WAIT,
 	COMPILE,
 	DEBUG,
-	REFACTOR
+	REFACTOR,
+	BURNED_OUT
 }	t_state;
 
 typedef struct s_dongle
 {
-}			t_dongle;
+}	t_dongle;
 
 typedef struct s_data
 {
 	int			number_of_coders;
 	int			number_of_compiles_required;
+	long		start_time;
 	long		time_to_burnout;
 	long		time_to_compile;
 	long		time_to_debug;
@@ -58,6 +61,11 @@ typedef struct s_coder
 	t_dongle	*left_dongle;
 	t_state		state;
 }				t_coder;
+
+typedef struct	s_heap
+{
+	int	id;
+}		t_heap;
 
 t_data	*parse_data(char **argv);
 t_coder	*init_coders(t_data *data);

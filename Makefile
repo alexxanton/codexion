@@ -15,6 +15,9 @@ OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 run: $(NAME)
 	./$(NAME) 5 1000 1000 1000 1000 5 1000 fifo
 
+make dbg: $(NAME)
+	valgrind --tool=helgrind ./$(NAME) 5 1000 1000 1000 1000 5 1000 fifo
+
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
