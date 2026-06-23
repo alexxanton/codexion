@@ -38,6 +38,8 @@ typedef struct s_dongle
 {
 }	t_dongle;
 
+typedef struct s_coder	t_coder;
+
 typedef struct s_data
 {
 	int			number_of_coders;
@@ -50,6 +52,7 @@ typedef struct s_data
 	long		dongle_cooldown;
 	t_scheduler	scheduler;
 	t_dongle	*dongles;
+	t_coder		*coders;
 }				t_data;
 
 typedef struct s_coder

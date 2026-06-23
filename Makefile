@@ -9,6 +9,8 @@ SRCS = main.c								\
 	   src/parsing/parse_data.c				\
 	   src/simulation/begin_simulation.c	\
 	   src/coders/init.c					\
+	   src/utils/logs.c						\
+	   src/monitor/init.c					\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
@@ -16,7 +18,7 @@ run: $(NAME)
 	./$(NAME) 5 1000 1000 1000 1000 5 1000 fifo
 
 make dbg: $(NAME)
-	valgrind --tool=helgrind ./$(NAME) 5 1000 1000 1000 1000 5 1000 fifo
+	valgrind --tool=helgrind ./$(NAME) 2 1000 1000 1000 1000 2 1000 fifo
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)

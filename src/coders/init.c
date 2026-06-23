@@ -34,20 +34,6 @@ void	*func(void *arg)
 	return (NULL);
 }
 
-static void	join_threads(t_coder *coders, int n_coders)
-{
-	int		i;
-	int		possible_errors;
-
-	possible_errors = 0;
-	i = 0;
-	while (i < n_coders)
-	{
-		possible_errors += pthread_join(coders[i].thread_id, NULL);
-		i++;
-	}
-}
-
 static t_coder	*allocate_coders(t_data *data)
 {
 	int			qty;
@@ -105,7 +91,5 @@ t_coder	*init_coders(t_data *data)
 	possible_errors = fill_data(data, coders);
 	if (possible_errors > 0)
 		return (NULL);
-	join_threads(coders, data->number_of_coders);
-	// todo: check for possible thread joining errors
 	return (coders);
 }
