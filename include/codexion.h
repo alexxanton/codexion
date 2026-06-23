@@ -17,6 +17,7 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <string.h>
+# include <unistd.h>
 
 typedef enum e_scheduler_types
 {
@@ -62,13 +63,27 @@ typedef struct s_coder
 	t_state		state;
 }				t_coder;
 
+typedef struct	s_request
+{
+	int		id;
+	long	priority;
+}			t_request;
+
 typedef struct	s_heap
 {
-	int	id;
-}		t_heap;
+	t_request	*requests;
+}				t_heap;
+
+typedef struct	s_monitor
+{
+	pthread_t	thread_id;
+}				t_monitor;
+
+t_monitor	*init_monitor(t_data *data);
 
 t_data	*parse_data(char **argv);
 t_coder	*init_coders(t_data *data);
 void	begin_simulation(t_data *data);
+void	print_log(t_coder *coder, char *msg);
 
 #endif
