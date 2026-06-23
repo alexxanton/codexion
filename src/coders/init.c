@@ -15,12 +15,20 @@
 void	*func(void *arg)
 {
 	t_coder	*self;
+	t_data	*data;
 
 	self = (t_coder *) arg;
-	//printf("%d\n", self->compiles_left);
+	data = self->data;
 	while (self->compiles_left)
 	{
-		printf("Coder <%d>: %d\n", self->id, self->compiles_left);
+		print_log(self, "compiling");
+		usleep(data->time_to_compile * 1000);
+
+		print_log(self, "debugging");
+		usleep(data->time_to_debug * 1000);
+
+		print_log(self, "refactoring");
+		usleep(data->time_to_refactor * 1000);
 		self->compiles_left--;
 	}
 	return (NULL);
@@ -62,21 +70,22 @@ static t_coder	*allocate_coders(t_data *data)
 
 static int	fill_data(t_data *data, t_coder *coders)
 {
-	int	i;
-	int	possible_errors;
+	int			i;
+	int			n_coders;
+	int			possible_errors;
 	t_dongle	*dongles;
 
+	n_coders = data->number_of_coders;
 	dongles = data->dongles;
 	possible_errors = 0;
 	i = 0;
-	while (i < data->number_of_coders)
+	while (i < n_coders)
 	{
 		coders[i].id = i + 1;
 		coders[i].data = data;
 		coders[i].compiles_left = data->number_of_compiles_required;
 		coders[i].right_dongle = &dongles[i];
-		if (data->number_of_coders > 1)
-			coders[i].left_dongle = &dongles[(i - 1) % data->number_of_coders];
+		coders[i].left_dongle = &dongles[(i + n_coders - 1) % n_coders];
 		possible_errors += pthread_create(
 			&coders[i].thread_id, NULL, func, &coders[i]
 		);
