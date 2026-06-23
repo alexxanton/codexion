@@ -2,12 +2,19 @@
 
 void	*monitor_func(void *arg)
 {
-	t_data		*data;
+	t_data	*data;
+	t_coder	*coder;
 
 	data = (t_data *) arg;
 	printf("Monitor monitoring monitoringfully!\n");
-	while (true)
-		printf("%d\n", data->coders[0].compiles_left);
+	coder = &data->coders[0];
+	while (!has_finished(coder))
+	{
+		pthread_mutex_lock(&coder->lock);
+		printf("%d\n", coder->compiles_left);
+		pthread_mutex_unlock(&coder->lock);
+		usleep(30000);
+	}
 	(void)data;
 	return (NULL);
 }

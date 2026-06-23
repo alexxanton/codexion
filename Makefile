@@ -10,6 +10,7 @@ SRCS = main.c								\
 	   src/simulation/begin_simulation.c	\
 	   src/coders/init.c					\
 	   src/utils/logs.c						\
+	   src/utils/monitoring.c				\
 	   src/monitor/init.c					\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))

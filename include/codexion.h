@@ -57,14 +57,15 @@ typedef struct s_data
 
 typedef struct s_coder
 {
-	int			id;
-	int			compiles_left;
-	pthread_t	thread_id;
-	t_data		*data;
-	t_dongle	*right_dongle;
-	t_dongle	*left_dongle;
-	t_state		state;
-}				t_coder;
+	int				id;
+	int				compiles_left;
+	pthread_t		thread_id;
+	t_data			*data;
+	t_dongle		*right_dongle;
+	t_dongle		*left_dongle;
+	t_state			state;
+	pthread_mutex_t	lock;
+}					t_coder;
 
 typedef struct	s_request
 {
@@ -83,6 +84,7 @@ typedef struct	s_monitor
 }				t_monitor;
 
 t_monitor	*init_monitor(t_data *data);
+bool		has_finished(t_coder *coder);
 
 t_data	*parse_data(char **argv);
 t_coder	*init_coders(t_data *data);

@@ -21,6 +21,12 @@ static void	join_threads(t_coder *coders, int n_coders)
 	i = 0;
 	while (i < n_coders)
 	{
+		possible_errors += pthread_mutex_init(&coders[i].lock, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < n_coders)
+	{
 		possible_errors += pthread_join(coders[i].thread_id, NULL);
 		i++;
 	}
