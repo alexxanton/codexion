@@ -17,7 +17,10 @@ void	*routine(void *arg)
 
 		print_log(self, "refactoring");
 		usleep(data->time_to_refactor * 1000);
+
+		pthread_mutex_lock(&self->lock);
 		self->compiles_left--;
+		pthread_mutex_unlock(&self->lock);
 	}
 	return (NULL);
 }

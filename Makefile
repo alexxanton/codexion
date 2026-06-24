@@ -18,10 +18,10 @@ SRCS = main.c								\
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 run: $(NAME)
-	./$(NAME) 5 1000 1000 1000 1000 5 1000 fifo
+	./$(NAME) 5 100 100 100 100 5 1000 fifo
 
 make dbg: $(NAME)
-	valgrind --tool=helgrind ./$(NAME) 2 1000 1000 1000 1000 2 1000 fifo
+	valgrind --tool=helgrind ./$(NAME) 2 100 100 100 100 2 1000 fifo
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
