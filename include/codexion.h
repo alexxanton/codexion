@@ -19,6 +19,8 @@
 # include <string.h>
 # include <unistd.h>
 
+typedef struct s_coder	t_coder;
+
 typedef enum e_scheduler_types
 {
 	FIFO,
@@ -34,11 +36,18 @@ typedef enum	e_coder_states
 	BURNED_OUT
 }	t_state;
 
+typedef struct	s_monitor
+{
+	pthread_t	thread_id;
+}				t_monitor;
+
 typedef struct s_dongle
 {
-}	t_dongle;
-
-typedef struct s_coder	t_coder;
+	pthread_mutex_t	lock;
+	pthread_cond_t	available;
+	bool			is_taken;
+	long			cooldown;
+}					t_dongle;
 
 typedef struct s_data
 {
@@ -53,6 +62,7 @@ typedef struct s_data
 	t_scheduler	scheduler;
 	t_dongle	*dongles;
 	t_coder		*coders;
+	t_monitor	*monitor;
 }				t_data;
 
 typedef struct s_coder
@@ -78,13 +88,14 @@ typedef struct	s_heap
 	t_request	*requests;
 }				t_heap;
 
-typedef struct	s_monitor
-{
-	pthread_t	thread_id;
-}				t_monitor;
-
 t_monitor	*init_monitor(t_data *data);
 bool		has_finished(t_coder *coder);
+
+void	init_mutexes(t_data *data);
+void	init_threads(t_data *data);
+void	join_threads(t_data *data);
+void	*routine(void *arg);
+void	*monitor_func(void *arg);
 
 t_data	*parse_data(char **argv);
 t_coder	*init_coders(t_data *data);

@@ -1,6 +1,6 @@
 NAME = codexion
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -pthread -I include
+CFLAGS = -Wall -Werror -Wextra -pthread -I include -g
 RM = rm -f
 OBJ_DIR = objs
 HEADERS = include/codexion.h
@@ -9,9 +9,11 @@ SRCS = main.c								\
 	   src/parsing/parse_data.c				\
 	   src/simulation/begin_simulation.c	\
 	   src/coders/init.c					\
+	   src/coders/routine.c					\
 	   src/utils/logs.c						\
 	   src/utils/monitoring.c				\
 	   src/monitor/init.c					\
+	   src/threads/init.c					\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 

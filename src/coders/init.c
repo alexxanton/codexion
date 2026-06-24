@@ -12,28 +12,6 @@
 
 #include <codexion.h>
 
-void	*func(void *arg)
-{
-	t_coder	*self;
-	t_data	*data;
-
-	self = (t_coder *) arg;
-	data = self->data;
-	while (self->compiles_left)
-	{
-		print_log(self, "compiling");
-		usleep(data->time_to_compile * 1000);
-
-		print_log(self, "debugging");
-		usleep(data->time_to_debug * 1000);
-
-		print_log(self, "refactoring");
-		usleep(data->time_to_refactor * 1000);
-		self->compiles_left--;
-	}
-	return (NULL);
-}
-
 static t_coder	*allocate_coders(t_data *data)
 {
 	int			qty;
@@ -72,9 +50,6 @@ static int	fill_data(t_data *data, t_coder *coders)
 		coders[i].compiles_left = data->number_of_compiles_required;
 		coders[i].right_dongle = &dongles[i];
 		coders[i].left_dongle = &dongles[(i + n_coders - 1) % n_coders];
-		possible_errors += pthread_create(
-			&coders[i].thread_id, NULL, func, &coders[i]
-		);
 		i++;
 	}
 	return (possible_errors);
