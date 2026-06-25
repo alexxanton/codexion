@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aanton-a <aanton-a@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/25 12:09:00 by aanton-a          #+#    #+#             */
+/*   Updated: 2026/06/25 13:36:59 by aanton-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <codexion.h>
 
 void	*monitor_func(void *arg)
@@ -21,8 +33,8 @@ void	*monitor_func(void *arg)
 
 t_monitor	*init_monitor(t_data *data)
 {
-	//int			errors;
 	t_monitor	*monitor;
+	//int			errors;
 
 	monitor = malloc(sizeof(t_monitor));
 	if (!monitor)

@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 17:34:41 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/17 16:07:58 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/25 12:07:07 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_scheduler_types
 	EDF
 }	t_scheduler;
 
-typedef enum	e_coder_states
+typedef enum e_coder_states
 {
 	WAIT,
 	COMPILE,
@@ -36,7 +36,7 @@ typedef enum	e_coder_states
 	BURNED_OUT
 }	t_state;
 
-typedef struct	s_monitor
+typedef struct s_monitor
 {
 	pthread_t	thread_id;
 }				t_monitor;
@@ -77,13 +77,13 @@ typedef struct s_coder
 	pthread_mutex_t	lock;
 }					t_coder;
 
-typedef struct	s_request
+typedef struct s_request
 {
 	int		id;
 	long	priority;
 }			t_request;
 
-typedef struct	s_heap
+typedef struct s_heap
 {
 	t_request	*requests;
 }				t_heap;
@@ -91,15 +91,15 @@ typedef struct	s_heap
 t_monitor	*init_monitor(t_data *data);
 bool		has_finished(t_coder *coder);
 
-void	init_mutexes(t_data *data);
-void	init_threads(t_data *data);
-void	join_threads(t_data *data);
-void	*routine(void *arg);
-void	*monitor_func(void *arg);
+void		init_mutexes(t_data *data);
+void		init_threads(t_data *data);
+void		join_threads(t_data *data);
+void		*routine(void *arg);
+void		*monitor_func(void *arg);
 
-t_data	*parse_data(char **argv);
-t_coder	*init_coders(t_data *data);
-void	begin_simulation(t_data *data);
-void	print_log(t_coder *coder, char *msg);
+t_data		*parse_data(char **argv);
+t_coder		*init_coders(t_data *data);
+void		begin_simulation(t_data *data);
+void		print_log(t_coder *coder, char *msg);
 
 #endif

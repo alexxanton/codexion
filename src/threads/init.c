@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aanton-a <aanton-a@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/25 12:09:24 by aanton-a          #+#    #+#             */
+/*   Updated: 2026/06/25 12:26:43 by aanton-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <codexion.h>
 
 void	init_mutexes(t_data *data)
@@ -24,8 +36,7 @@ void	init_threads(t_data *data)
 	while (i < data->number_of_coders)
 	{
 		errors += pthread_create(
-			&data->coders[i].thread_id, NULL, routine, &data->coders[i]
-		);
+				&data->coders[i].thread_id, NULL, routine, &data->coders[i]);
 		i++;
 	}
 }
