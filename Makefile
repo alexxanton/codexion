@@ -11,6 +11,7 @@ SRCS = main.c								\
 	   src/coders/init.c					\
 	   src/coders/routine.c					\
 	   src/utils/logs.c						\
+	   src/utils/time.c						\
 	   src/utils/monitoring.c				\
 	   src/monitor/init.c					\
 	   src/threads/init.c					\

@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 17:34:41 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/25 12:07:07 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/25 15:55:38 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 typedef struct s_coder	t_coder;
 
@@ -101,5 +102,6 @@ t_data		*parse_data(char **argv);
 t_coder		*init_coders(t_data *data);
 void		begin_simulation(t_data *data);
 void		print_log(t_coder *coder, char *msg);
+long		get_time();
 
 #endif

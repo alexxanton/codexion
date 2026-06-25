@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logs.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aanton-a <aanton-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/25 12:10:21 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/25 15:55:55 by aanton-a         ###   ########.fr       */
+/*   Created: 2026/06/25 15:05:47 by aanton-a          #+#    #+#             */
+/*   Updated: 2026/06/25 16:56:38 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <codexion.h>
 
-void	print_log(t_coder *coder, char *msg)
+long	get_time()
 {
-	printf("%ld %d %s\n", get_time(), coder->id, msg);
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec);
 }
