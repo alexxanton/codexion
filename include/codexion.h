@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 17:34:41 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/25 15:55:38 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/26 14:58:33 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_coder
 {
 	int				id;
 	int				compiles_left;
+	long			last_compile;
 	pthread_t		thread_id;
 	t_data			*data;
 	t_dongle		*right_dongle;
@@ -90,20 +91,20 @@ typedef struct s_heap
 	t_request	*requests;
 }				t_heap;
 
-t_monitor	*init_monitor(t_data *data);
-bool		has_finished(t_coder *coder);
+t_monitor		*init_monitor(t_data *data);
+bool			has_finished(t_coder *coder);
 
-void		init_mutexes(t_data *data);
-void		init_threads(t_data *data);
-void		join_threads(t_data *data);
-void		*routine(void *arg);
-void		*monitor_func(void *arg);
+void			init_mutexes(t_data *data);
+void			init_threads(t_data *data);
+void			join_threads(t_data *data);
+void			*routine(void *arg);
+void			*monitor_func(void *arg);
 
-t_data		*parse_data(char **argv);
-t_coder		*init_coders(t_data *data);
-void		begin_simulation(t_data *data);
-void		print_log(t_coder *coder, char *msg);
-long		get_time_ms(t_data *data);
+t_data			*parse_data(char **argv);
+t_coder			*init_coders(t_data *data);
+void			begin_simulation(t_data *data);
+void			print_log(t_coder *coder, char *msg);
+long			get_time_ms(t_data *data);
 struct timeval	get_time(void);
 
 #endif

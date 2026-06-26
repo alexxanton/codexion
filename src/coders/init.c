@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 15:29:48 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/17 16:20:56 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/26 16:30:24 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	fill_data(t_data *data, t_coder *coders)
 		coders[i].id = i + 1;
 		coders[i].data = data;
 		coders[i].compiles_left = data->number_of_compiles_required;
+		coders[i].last_compile = 0;
 		coders[i].right_dongle = &dongles[i];
 		coders[i].left_dongle = &dongles[(i + n_coders - 1) % n_coders];
 		i++;

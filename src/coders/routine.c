@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 12:08:20 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/25 12:32:52 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/06/26 15:45:16 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*routine(void *arg)
 	data = self->data;
 	while (self->compiles_left)
 	{
+		self->last_compile = get_time_ms(self->data);
 		print_log(self, "compiling");
 		usleep(data->time_to_compile * 1000);
 
