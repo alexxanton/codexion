@@ -12,10 +12,22 @@
 
 #include <codexion.h>
 
-long	get_time()
+struct timeval	get_time(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return (time.tv_sec);
+	return (time);
+}
+
+long	get_time_ms(t_data *data)
+{
+	struct timeval	current_time;
+	long			time;
+	long			micro;
+
+	current_time = get_time();
+	time = current_time.tv_sec - data->start_time.tv_sec;
+	micro = current_time.tv_usec - data->start_time.tv_usec;
+	return ((time * 1000) + (micro / 1000));
 }

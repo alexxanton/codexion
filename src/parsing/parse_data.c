@@ -81,5 +81,6 @@ t_data	*parse_data(char **argv)
 	data->number_of_compiles_required = atoi(argv[6]);
 	data->dongle_cooldown = atoi(argv[7]);
 	data->scheduler = get_scheduler(argv[8]);
+	data->start_time = get_time();
 	return (data);
 }

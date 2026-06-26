@@ -18,7 +18,6 @@ void	*monitor_func(void *arg)
 	t_coder	*coder;
 
 	data = (t_data *) arg;
-	printf("Monitor monitoring monitoringfully!\n");
 	coder = &data->coders[0];
 	while (!has_finished(coder))
 	{
@@ -34,17 +33,10 @@ void	*monitor_func(void *arg)
 t_monitor	*init_monitor(t_data *data)
 {
 	t_monitor	*monitor;
-	//int			errors;
 
 	monitor = malloc(sizeof(t_monitor));
 	if (!monitor)
 		return (NULL);
-	//errors = pthread_create(&monitor->thread_id, NULL, monitor_func, data);
-	//if (errors > 0)
-	//{
-	//	free(monitor);
-	//	return (NULL);
-	//}
 	(void)data;
 	return (monitor);
 }

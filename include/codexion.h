@@ -52,19 +52,20 @@ typedef struct s_dongle
 
 typedef struct s_data
 {
-	int			number_of_coders;
-	int			number_of_compiles_required;
-	long		start_time;
-	long		time_to_burnout;
-	long		time_to_compile;
-	long		time_to_debug;
-	long		time_to_refactor;
-	long		dongle_cooldown;
-	t_scheduler	scheduler;
-	t_dongle	*dongles;
-	t_coder		*coders;
-	t_monitor	*monitor;
-}				t_data;
+	int				number_of_coders;
+	int				number_of_compiles_required;
+	struct timeval	start_time;
+	long			time_to_burnout;
+	long			time_to_compile;
+	long			time_to_debug;
+	long			time_to_refactor;
+	long			dongle_cooldown;
+	t_scheduler		scheduler;
+	t_dongle		*dongles;
+	t_coder			*coders;
+	t_monitor		*monitor;
+	pthread_mutex_t	print_lock;
+}					t_data;
 
 typedef struct s_coder
 {
@@ -102,6 +103,7 @@ t_data		*parse_data(char **argv);
 t_coder		*init_coders(t_data *data);
 void		begin_simulation(t_data *data);
 void		print_log(t_coder *coder, char *msg);
-long		get_time();
+long		get_time_ms(t_data *data);
+struct timeval	get_time(void);
 
 #endif

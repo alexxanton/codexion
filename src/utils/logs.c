@@ -14,5 +14,7 @@
 
 void	print_log(t_coder *coder, char *msg)
 {
-	printf("%ld %d %s\n", get_time(), coder->id, msg);
+	pthread_mutex_lock(&coder->data->print_lock);
+	printf("%ld %d %s\n", get_time_ms(coder->data), coder->id, msg);
+	pthread_mutex_unlock(&coder->data->print_lock);
 }
