@@ -21,14 +21,14 @@ void	*routine(void *arg)
 	data = self->data;
 	while (self->compiles_left)
 	{
-		self->last_compile = get_time_ms(self->data);
-		print_log(self, "compiling");
+		//self->last_compile = get_time_ms(self->data);
+		print_log(self, "is compiling");
 		usleep(data->time_to_compile * 1000);
 
-		print_log(self, "debugging");
+		print_log(self, "is debugging");
 		usleep(data->time_to_debug * 1000);
 
-		print_log(self, "refactoring");
+		print_log(self, "is refactoring");
 		usleep(data->time_to_refactor * 1000);
 
 		pthread_mutex_lock(&self->lock);

@@ -12,7 +12,7 @@
 
 #include <codexion.h>
 
-bool	burnout(t_data *data)
+static bool	burnout_found(t_data *data)
 {
 	int		i;
 	long	last_compile;
@@ -21,7 +21,7 @@ bool	burnout(t_data *data)
 	while (i < data->number_of_coders)
 	{
 		last_compile = data->coders[i].last_compile;
-		if (get_time_ms(data) > (last_compile + data->time_to_burnout))
+		if (get_time_ms(data) >= (last_compile + data->time_to_burnout))
 		{
 			print_log(&data->coders[i], "burn out");
 			return (true);
@@ -31,20 +31,33 @@ bool	burnout(t_data *data)
 	return (false);
 }
 
+static bool	coders_active(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->number_of_coders)
+	{
+		if (!has_finished(&data->coders[i]))
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 void	*monitor_func(void *arg)
 {
 	t_data	*data;
-	//t_coder	*coder;
 
 	data = (t_data *) arg;
-	//coder = &data->coders[0];
-	//while (!has_finished(coder))
-	while (true)
+	while (coders_active(data))
 	{
-		if (burnout(data))
+		if (burnout_found(data))
 		{
+			//exit(0);
 			break ;
 		}
+		usleep(1000);
 	}
 	return (NULL);
 }
