@@ -12,6 +12,24 @@
 
 #include <codexion.h>
 
+static void	execute_task(t_coder *coder, long time)
+{
+	char	*msg;
+
+	msg = "";
+	coder->state++;
+	if (coder->state == COMPILE)
+		msg = "is compiling";
+	else if (coder->state == DEBUG)
+		msg = "is debugging";
+	else if (coder->state == REFACTOR)
+		msg = "is refactoring";
+	print_log(coder, msg);
+	usleep(time * 1000);
+	if (coder->state >= REFACTOR)
+		coder->state = WAIT;
+}
+
 void	*routine(void *arg)
 {
 	t_coder	*self;
@@ -21,15 +39,13 @@ void	*routine(void *arg)
 	data = self->data;
 	while (self->compiles_left)
 	{
-		//self->last_compile = get_time_ms(self->data);
-		print_log(self, "is compiling");
-		usleep(data->time_to_compile * 1000);
+		pthread_mutex_lock(&self->lock);
+		self->last_compile = get_time_ms(self->data);
+		pthread_mutex_unlock(&self->lock);
 
-		print_log(self, "is debugging");
-		usleep(data->time_to_debug * 1000);
-
-		print_log(self, "is refactoring");
-		usleep(data->time_to_refactor * 1000);
+		execute_task(self, data->time_to_compile);
+		execute_task(self, data->time_to_debug);
+		execute_task(self, data->time_to_refactor);
 
 		pthread_mutex_lock(&self->lock);
 		self->compiles_left--;

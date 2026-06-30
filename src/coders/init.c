@@ -47,6 +47,7 @@ static int	fill_data(t_data *data, t_coder *coders)
 	{
 		coders[i].id = i + 1;
 		coders[i].data = data;
+		coders[i].state = WAIT;
 		coders[i].compiles_left = data->number_of_compiles_required;
 		coders[i].last_compile = 0;
 		coders[i].right_dongle = &dongles[i];
