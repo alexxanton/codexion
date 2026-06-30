@@ -20,14 +20,15 @@ struct timeval	get_time(void)
 	return (time);
 }
 
+long	timestamp_ms(struct timeval time)
+{
+	return (time.tv_sec * 1000L + time.tv_usec / 1000);
+}
+
 long	get_time_ms(t_data *data)
 {
-	struct timeval	current_time;
-	long			time;
-	long			micro;
+	struct timeval	now;
 
-	current_time = get_time();
-	time = current_time.tv_sec - data->start_time.tv_sec;
-	micro = current_time.tv_usec - data->start_time.tv_usec;
-	return ((time * 1000) + (micro / 1000));
+	now = get_time();
+	return (timestamp_ms(now) - timestamp_ms(data->start_time));
 }
