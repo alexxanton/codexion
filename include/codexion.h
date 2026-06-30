@@ -34,7 +34,7 @@ typedef enum e_coder_states
 	COMPILE,
 	DEBUG,
 	REFACTOR,
-	BURNED_OUT
+	NONE
 }	t_state;
 
 typedef struct s_monitor
@@ -52,19 +52,21 @@ typedef struct s_dongle
 
 typedef struct s_data
 {
+	bool			run;
 	int				number_of_coders;
 	int				number_of_compiles_required;
-	struct timeval	start_time;
 	long			time_to_burnout;
 	long			time_to_compile;
 	long			time_to_debug;
 	long			time_to_refactor;
 	long			dongle_cooldown;
+	struct timeval	start_time;
 	t_scheduler		scheduler;
 	t_dongle		*dongles;
 	t_coder			*coders;
 	t_monitor		*monitor;
 	pthread_mutex_t	print_lock;
+	pthread_mutex_t	burnout_lock;
 }					t_data;
 
 typedef struct s_coder

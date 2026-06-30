@@ -18,6 +18,7 @@ void	init_mutexes(t_data *data)
 
 	i = 0;
 	pthread_mutex_init(&data->print_lock, NULL);
+	pthread_mutex_init(&data->burnout_lock, NULL);
 	while (i < data->number_of_coders)
 	{
 		pthread_mutex_init(&data->coders[i].lock, NULL);
