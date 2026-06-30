@@ -24,7 +24,8 @@ static bool	burnout_found(t_data *data)
 		last_compile = data->coders[i].last_compile;
 		pthread_mutex_unlock(&data->coders[i].lock);
 
-		if (get_time_ms(data) >= (last_compile + data->time_to_burnout))
+		// todo: determine whether to use > or >=
+		if (get_time_ms(data) > (last_compile + data->time_to_burnout))
 		{
 			print_log(&data->coders[i], "burn out");
 			return (true);
@@ -62,7 +63,7 @@ void	*monitor_func(void *arg)
 			pthread_mutex_unlock(&data->burnout_lock);
 			break ;
 		}
-		usleep(1000);
+		usleep(100);
 	}
 	return (NULL);
 }

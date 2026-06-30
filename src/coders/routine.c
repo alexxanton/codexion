@@ -12,6 +12,21 @@
 
 #include <codexion.h>
 
+static void	simulate_task(t_data *data, long time)
+{
+	bool	run;
+
+	run = true;
+	while (run && time > 0)
+	{
+		pthread_mutex_lock(&data->burnout_lock);
+		run = data->run;
+		pthread_mutex_unlock(&data->burnout_lock);
+		usleep(1000);
+		time--;
+	}
+}
+
 static void	execute_task(t_coder *coder, long time)
 {
 	char	*msg;
@@ -25,7 +40,7 @@ static void	execute_task(t_coder *coder, long time)
 	else if (coder->state == REFACTOR)
 		msg = "is refactoring";
 	print_log(coder, msg);
-	usleep(time * 1000);
+	simulate_task(coder->data, time);
 	if (coder->state >= REFACTOR)
 		coder->state = WAIT;
 }
