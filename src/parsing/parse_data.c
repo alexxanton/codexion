@@ -73,6 +73,7 @@ t_data	*parse_data(char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->run = true;
 	data->number_of_coders = atoi(argv[1]);
 	data->time_to_burnout = atoi(argv[2]);
 	data->time_to_compile = atoi(argv[3]);
