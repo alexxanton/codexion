@@ -14,9 +14,20 @@
 
 void	take_dongle(t_coder *coder, t_dongle *dongle)
 {
-	return ;
+	pthread_mutex_lock(&dongle->lock);
+	if (dongle->is_taken)
+	{
+		pthread_mutex_unlock(&dongle->lock);
+		return ;
+	}
+	dongle->is_taken = true;
+	pthread_mutex_unlock(&dongle->lock);
+	print_log(coder, "has taken a dongle");
 }
 
-void	release_dongle()
+void	release_dongle(t_dongle *dongle)
 {
+	pthread_mutex_lock(&dongle->lock);
+	dongle->is_taken = false;
+	pthread_mutex_unlock(&dongle->lock);
 }
