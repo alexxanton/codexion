@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 17:34:41 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/26 14:58:33 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/07/01 15:27:17 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ void			begin_simulation(t_data *data);
 void			print_log(t_coder *coder, char *msg);
 long			get_time_ms(t_data *data);
 struct timeval	get_time(void);
+
+void	take_dongle(t_coder *coder, t_dongle *dongle);
 
 #endif

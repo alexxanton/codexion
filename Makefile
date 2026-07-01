@@ -15,6 +15,7 @@ SRCS = main.c								\
 	   src/utils/monitoring.c				\
 	   src/monitor/init.c					\
 	   src/threads/init.c					\
+	   src/dongles/dongle.c					\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
