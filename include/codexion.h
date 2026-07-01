@@ -93,22 +93,31 @@ typedef struct s_heap
 	t_request	*requests;
 }				t_heap;
 
+// Monitor
 t_monitor		*init_monitor(t_data *data);
+void			*monitor_func(void *arg);
 bool			has_finished(t_coder *coder);
 
+// Threads
 void			init_mutexes(t_data *data);
 void			init_threads(t_data *data);
 void			join_threads(t_data *data);
-void			*routine(void *arg);
-void			*monitor_func(void *arg);
 
-t_data			*parse_data(char **argv);
+// Coder
 t_coder			*init_coders(t_data *data);
-void			begin_simulation(t_data *data);
-void			print_log(t_coder *coder, char *msg);
+void			*routine(void *arg);
+
+// Time
 long			get_time_ms(t_data *data);
 struct timeval	get_time(void);
 
-void	take_dongle(t_coder *coder, t_dongle *dongle);
+// Dongles
+void			take_dongle(t_coder *coder, t_dongle *dongle);
+void			release_dongle(t_dongle *dongle);
+
+// Misc
+t_data			*parse_data(char **argv);
+void			begin_simulation(t_data *data);
+void			print_log(t_coder *coder, char *msg);
 
 #endif
