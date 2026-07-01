@@ -68,6 +68,9 @@ void	*routine(void *arg)
 		pthread_mutex_lock(&self->lock);
 		self->compiles_left--;
 		pthread_mutex_unlock(&self->lock);
+
+		release_dongle(self->left_dongle);
+		release_dongle(self->right_dongle);
 	}
 	return (NULL);
 }

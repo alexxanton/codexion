@@ -52,6 +52,7 @@ static int	fill_data(t_data *data, t_coder *coders)
 		coders[i].last_compile = 0;
 		coders[i].right_dongle = &dongles[i];
 		coders[i].left_dongle = &dongles[(i + n_coders - 1) % n_coders];
+		dongles[i].is_taken = false;
 		i++;
 	}
 	return (possible_errors);
