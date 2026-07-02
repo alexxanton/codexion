@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 12:09:24 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/25 12:26:43 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/07/02 12:48:50 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_mutexes(t_data *data)
 	{
 		pthread_mutex_init(&data->coders[i].lock, NULL);
 		pthread_mutex_init(&data->dongles[i].lock, NULL);
+		pthread_cond_init(&data->dongles[i].available, NULL);
 		i++;
 	}
 }
