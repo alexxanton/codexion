@@ -12,18 +12,20 @@ SRCS = main.c								\
 	   src/coders/routine.c					\
 	   src/utils/logs.c						\
 	   src/utils/time.c						\
-	   src/utils/monitoring.c				\
+	   src/utils/utils.c					\
 	   src/monitor/init.c					\
 	   src/threads/init.c					\
 	   src/dongles/dongle.c					\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
+PARAMS = 1 1000 100 100 100 2 1000 fifo
+
 run: $(NAME)
-	./$(NAME) 2 1000 100 100 100 2 1000 fifo
+	./$(NAME) $(PARAMS)
 
 make dbg: $(NAME)
-	valgrind --tool=helgrind ./$(NAME) 2 1000 100 100 100 2 1000 fifo
+	valgrind --tool=helgrind ./$(NAME) $(PARAMS)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)

@@ -119,5 +119,6 @@ void			release_dongle(t_dongle *dongle);
 t_data			*parse_data(char **argv);
 void			begin_simulation(t_data *data);
 void			print_log(t_coder *coder, char *msg);
+bool			simulation_running(t_data *data);
 
 #endif
