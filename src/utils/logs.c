@@ -6,7 +6,7 @@
 /*   By: aanton-a <aanton-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 12:10:21 by aanton-a          #+#    #+#             */
-/*   Updated: 2026/06/25 15:55:55 by aanton-a         ###   ########.fr       */
+/*   Updated: 2026/07/02 14:10:53 by aanton-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define COMPILE		"⚡ \033[38;5;82m"
 #define DEBUG		"🐛 \033[38;5;48m"
-#define REFACTOR	"🛠️ \033[38;5;39m"
+#define REFACTOR	"🔧 \033[38;5;39m"
 #define DONGLE		"🔌 \033[38;5;214m"
 #define RED			"🔥 \033[31m"
 #define RESET		"\033[0m"
@@ -24,7 +24,8 @@
 
 void	print_log(t_coder *coder, char *msg)
 {
-    const char *msg_color = WHITE;
+    char *msg_color = WHITE;
+    char *id_color = "";
 
 	if (strstr(msg, "compiling"))
 		msg_color = COMPILE;
@@ -37,16 +38,21 @@ void	print_log(t_coder *coder, char *msg)
 	else if (strstr(msg, "dongle"))
 		msg_color = DONGLE;
 
+	id_color = msg_color;
+	while(*id_color != ' ')
+		id_color++;
+
 	pthread_mutex_lock(&coder->data->burnout_lock);
 	pthread_mutex_lock(&coder->data->print_lock);
 	if (coder->data->run)
 	{
 		printf(
 				GRAY "%-8ld "
-				BLUE "ID: %-5d "
+				"%sCoder %-5d "
 				"%s%s"
 				RESET "\n",
 				get_time_ms(coder->data),
+				id_color,
 				coder->id,
 				msg_color,
 				msg
