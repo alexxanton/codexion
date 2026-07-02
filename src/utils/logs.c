@@ -33,7 +33,7 @@ void	print_log(t_coder *coder, char *msg)
 		msg_color = DEBUG;
 	else if (strstr(msg, "refactoring"))
 		msg_color = REFACTOR;
-	else if (strstr(msg, "burn out"))
+	else if (strstr(msg, "burn"))
 		msg_color = RED;
 	else if (strstr(msg, "dongle"))
 		msg_color = DONGLE;
@@ -44,7 +44,7 @@ void	print_log(t_coder *coder, char *msg)
 
 	pthread_mutex_lock(&coder->data->burnout_lock);
 	pthread_mutex_lock(&coder->data->print_lock);
-	if (coder->data->run)
+	if (coder->data->run || strcmp(msg, "burned out") == 0)
 	{
 		printf(
 				GRAY "%-8ld "
@@ -65,7 +65,10 @@ void	print_log(t_coder *coder, char *msg)
 /*
 void	print_log(t_coder *coder, char *msg)
 {
-
+	if (strcmp(msg, "burn out") == 0)
+	{
+		printf("%ld %d %s\n", get_time_ms(coder->data), coder->id, msg);
+	}
 	pthread_mutex_lock(&coder->data->burnout_lock);
 	pthread_mutex_lock(&coder->data->print_lock);
 	if (coder->data->run)
