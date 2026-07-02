@@ -14,18 +14,11 @@
 
 static void	simulate_task(t_data *data, long time)
 {
-	bool	run;
 	long	end;
 
 	end = get_time_ms(data) + time;
-	run = true;
-	while (run && get_time_ms(data) < end)
-	{
-		pthread_mutex_lock(&data->burnout_lock);
-		run = data->run;
-		pthread_mutex_unlock(&data->burnout_lock);
+	while (simulation_running(data) && get_time_ms(data) < end)
 		usleep(500);
-	}
 }
 
 static void	execute_task(t_coder *coder, long time)
@@ -53,6 +46,9 @@ void	*routine(void *arg)
 
 	self = (t_coder *) arg;
 	data = self->data;
+	pthread_mutex_lock(&self->lock);
+	self->last_compile = get_time_ms(self->data);
+	pthread_mutex_unlock(&self->lock);
 	while (self->compiles_left)
 	{
 		//pthread_mutex_lock(&data->burnout_lock);
